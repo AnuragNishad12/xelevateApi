@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #444;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #d63384;
+        }
+        .endpoint {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Upload API Documentation</h1>
+        <p>This API allows users to upload, retrieve, and delete images with advanced validation.</p><h2>1. Setup & Installation</h2>
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Node.js installed</li>
+        <li>Express.js & required dependencies</li>
+    </ul>
+    <h3>Install Dependencies</h3>
+    <pre><code>npm install express multer uuid path fs</code></pre>
+    <h3>Run the Server</h3>
+    <pre><code>node server.js</code></pre>
+    <p>Default runs on <code>http://localhost:3000</code></p>
+    
+    <h2>2. API Endpoints</h2>
+    
+    <h3>1. Upload an Image</h3>
+    <p class="endpoint">POST /api/image/upload</p>
+    <h4>Request:</h4>
+    <pre><code>Content-Type: multipart/form-data</code></pre>
+    <h4>Example Request (cURL)</h4>
+    <pre><code>curl -X POST http://localhost:3000/api/image/upload \n  -F "image=@/path/to/image.jpg" \n  -F "description=Sample Image" \n  -F "name=MyImage"</code></pre>
+    <h4>Response:</h4>
+    <pre><code>{
+
+"message": "Image uploaded successfully", "id": "550e8400-e29b-41d4-a716-446655440000", "originalFilename": "image.jpg", "sanitizedFilename": "image.jpg", "mimetype": "image/jpeg", "size": 245678, "description": "Sample Image", "name": "MyImage", "imageUrl": "/uploads/image_550e8400-e29b-41d4-a716-446655440000.jpg" }</code></pre>
+
+<h3>2. Retrieve an Uploaded Image</h3>
+    <p class="endpoint">GET /api/image/uploads/:filename</p>
+    <p>Usage:</p>
+    <pre><code>http://localhost:3000/api/image/uploads/image_550e8400-e29b-41d4-a716-446655440000.jpg</code></pre>
+    <h4>Use in HTML:</h4>
+    <pre><code>&lt;img src="http://localhost:3000/api/image/uploads/image_550e8400-e29b-41d4-a716-446655440000.jpg"&gt;</code></pre>
+    
+    <h3>3. Delete an Uploaded Image</h3>
+    <p class="endpoint">DELETE /api/image/upload/:filename</p>
+    <h4>Example Request (cURL)</h4>
+    <pre><code>curl -X DELETE http://localhost:3000/api/image/upload/image_550e8400-e29b-41d4-a716-446655440000.jpg</code></pre>
+    <h4>Response:</h4>
+    <pre><code>{ "message": "Image deleted successfully" }</code></pre>
+    
+    <h2>3. Features & Validations</h2>
+    <ul>
+        <li>Multer-based image storage</li>
+        <li>UUID-based random ID generation</li>
+        <li>File type & size validation (JPEG, PNG, GIF, max 5MB)</li>
+        <li>Static file serving for uploaded images</li>
+    </ul>
+    
+    <h2>4. Server Configuration</h2>
+    <h3>Change Upload Directory</h3>
+    <pre><code>destination: 'uploads/'</code></pre>
+    <h3>Change File Size Limit</h3>
+    <pre><code>limits: { fileSize: 10 * 1024 * 1024 }</code></pre>
+    
+    <h2>5. Deployment Notes</h2>
+    <h3>Run in Production</h3>
+    <pre><code>npm install -g pm2
+
+pm2 start server.js</code></pre> <h3>Use Reverse Proxy (NGINX)</h3> <pre><code>server { listen 80; server_name example.com;
+
+location /uploads/ {
+    root /path/to/server;
+}
+
+location / {
+    proxy_pass http://localhost:3000;
+}
+
+}</code></pre>
+
+<h2>6. Example Frontend Usage</h2>
+    <h3>React Example</h3>
+    <pre><code>const uploadImage = async (file, description, name) => {
+
+const formData = new FormData(); formData.append("image", file); formData.append("description", description); formData.append("name", name);
+
+const response = await fetch("http://localhost:3000/api/image/upload", { method: "POST", body: formData, });
+
+const data = await response.json(); console.log("Uploaded Image Info:", data); };</code></pre>
+
+<h2>Questions?</h2>
+    <p>If you need further modifications or enhancements, let me know!</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Member API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      color: #4CAF50;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 24px;
+      margin-top: 20px;
+      color: #333;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin-bottom: 20px;
+    }
+    .api-section {
+      margin-bottom: 30px;
+    }
+    .api-endpoint {
+      background-color: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .endpoint-title {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+    }
+    .request-response {
+      font-size: 14px;
+      color: #555;
+      padding: 10px;
+      border-left: 4px solid #4CAF50;
+      background-color: #f9f9f9;
+    }
+    .request-response pre {
+      font-size: 14px;
+      background-color: #fafafa;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Team Member API Documentation</h1>
+    <p>Learn how to interact with the Team Member API</p>
+  </header>
+
+  <div class="container">
+    <h2>API Overview</h2>
+    <p>The Team Member API allows you to perform CRUD operations (Create, Read, Update, Delete) for managing team members. You can access team member data, add new members, update existing ones, or delete them.</p>
+
+    <!-- Get All Team Members Endpoint -->
+    <div class="api-section">
+      <h2>GET /api/team-members</h2>
+      <div class="api-endpoint">
+        <p class="endpoint-title">Description:</p>
+        <p>Returns a list of all team members.</p>
+
+        <p class="endpoint-title">Request:</p>
+        <pre>GET /api/team-members</pre>
+
+        <p class="endpoint-title">Response:</p>
+        <div class="request-response">
+          <pre>
+[
+  {
+    "id": "1",
+    "name": "Kanika Tekriwal",
+    "role": "Founder",
+    "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": "2",
+    "name": "Akshat Aggarwal",
+    "role": "CFO",
+    "image": "https://via.placeholder.com/150"
+  }
+]
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Get Specific Team Member by ID -->
+    <div class="api-section">
+      <h2>GET /api/team-members/:id</h2>
+      <div class="api-endpoint">
+        <p class="endpoint-title">Description:</p>
+        <p>Returns a specific team member by ID.</p>
+
+        <p class="endpoint-title">Request:</p>
+        <pre>GET /api/team-members/:id</pre>
+
+        <p class="endpoint-title">Response:</p>
+        <div class="request-response">
+          <pre>
+{
+  "id": "1",
+  "name": "Kanika Tekriwal",
+  "role": "Founder",
+  "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+}
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST Team Member Endpoint -->
+    <div class="api-section">
+      <h2>POST /api/team-members</h2>
+      <div class="api-endpoint">
+        <p class="endpoint-title">Description:</p>
+        <p>Creates a new team member and automatically generates a UUID.</p>
+
+        <p class="endpoint-title">Request:</p>
+        <pre>POST /api/team-members</pre>
+
+        <p class="endpoint-title">Request Body:</p>
+        <div class="request-response">
+          <pre>
+{
+  "name": "Hinata",
+  "role": "Co-Founder",
+  "image": "https://via.placeholder.com/150"
+}
+          </pre>
+        </div>
+
+        <p class="endpoint-title">Response:</p>
+        <div class="request-response">
+          <pre>
+{
+  "id": "5f1a21c7-e7f9-4c0d-81db-bcd6175b23f4",
+  "name": "Hinata",
+  "role": "Co-Founder",
+  "image": "https://via.placeholder.com/150"
+}
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- PATCH Team Member Endpoint -->
+    <div class="api-section">
+      <h2>PATCH /api/team-members/:id</h2>
+      <div class="api-endpoint">
+        <p class="endpoint-title">Description:</p>
+        <p>Updates an existing team member by ID.</p>
+
+        <p class="endpoint-title">Request:</p>
+        <pre>PATCH /api/team-members/:id</pre>
+
+        <p class="endpoint-title">Request Body:</p>
+        <div class="request-response">
+          <pre>
+{
+  "name": "Hinata Uzumaki",
+  "role": "Co-Founder",
+  "image": "https://via.placeholder.com/150"
+}
+          </pre>
+        </div>
+
+        <p class="endpoint-title">Response:</p>
+        <div class="request-response">
+          <pre>
+{
+  "id": "5f1a21c7-e7f9-4c0d-81db-bcd6175b23f4",
+  "name": "Hinata Uzumaki",
+  "role": "Co-Founder",
+  "image": "https://via.placeholder.com/150"
+}
+          </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELETE Team Member Endpoint -->
+    <div class="api-section">
+      <h2>DELETE /api/team-members/:id</h2>
+      <div class="api-endpoint">
+        <p class="endpoint-title">Description:</p>
+        <p>Deletes a specific team member by ID.</p>
+
+        <p class="endpoint-title">Request:</p>
+        <pre>DELETE /api/team-members/:id</pre>
+
+        <p class="endpoint-title">Response:</p>
+        <div class="request-response">
+          <pre>204 No Content</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELETE All Team Members Endpoint -->
+    <div class="api-section">
+      <h2>DELETE /api/team-members</h2>
+      <div class="api-endpoint">
+        <p class="endpoint-title">Description:</p>
+        <p>Deletes all team members.</p>
+
+        <p class="endpoint-title">Request:</p>
+        <pre>DELETE /api/team-members</pre>
+
+        <p class="endpoint-title">Response:</p>
+        <div class="request-response">
+          <pre>204 No Content</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Team Member API Documentation</p>
+  </footer>
+
+</body>
+</html>

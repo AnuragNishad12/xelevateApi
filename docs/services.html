@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Our Services API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #007bff;
+      margin-top: 20px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .api-section {
+      margin-top: 20px;
+    }
+
+    .api-method {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px 0;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .code {
+      background-color: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
+      display: block;
+      margin-top: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .note {
+      background-color: #fff3cd;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      color: #856404;
+    }
+
+    footer {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    .api-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .api-header h3 {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Our Services API Documentation</h1>
+  <p>Comprehensive guide to interacting with the "Our Services" API</p>
+</header>
+
+<div class="container">
+  <h2>Overview</h2>
+  <p>This API allows you to manage "Our Services" by performing CRUD operations (Create, Read, Update, Delete). It supports UUID-based identifiers for each service entry.</p>
+
+  <h2>Base URL</h2>
+  <p>The base URL for all API requests is:</p>
+  <div class="api-method">
+    <code>https://yourapi.com/api/our-services</code>
+  </div>
+
+  <div class="api-section">
+    <h2>API Endpoints</h2>
+
+    <div class="api-method">
+      <div class="api-header">
+        <h3>GET /api/our-services</h3>
+        <span>Method: GET</span>
+      </div>
+      <p>Fetch all services available in the database.</p>
+      <div class="code">
+        <pre>
+GET /api/our-services
+
+Response:
+  200 OK
+  [
+    {
+      "id": "12345678-abcd-1234-abcd-1234abcd1234",
+      "name": "Web Development",
+      "image": "https://example.com/image.jpg",
+      "description": "Custom web development services"
+    },
+    ...
+  ]
+        </pre>
+      </div>
+    </div>
+
+    <div class="api-method">
+      <div class="api-header">
+        <h3>GET /api/our-services/:id</h3>
+        <span>Method: GET</span>
+      </div>
+      <p>Retrieve a specific service by its UUID.</p>
+      <div class="code">
+        <pre>
+GET /api/our-services/12345678-abcd-1234-abcd-1234abcd1234
+
+Response:
+  200 OK
+  {
+    "id": "12345678-abcd-1234-abcd-1234abcd1234",
+    "name": "Web Development",
+    "image": "https://example.com/image.jpg",
+    "description": "Custom web development services"
+  }
+        </pre>
+      </div>
+    </div>
+
+    <div class="api-method">
+      <div class="api-header">
+        <h3>POST /api/our-services</h3>
+        <span>Method: POST</span>
+      </div>
+      <p>Create a new service and automatically generate a UUID for it.</p>
+      <div class="code">
+        <pre>
+POST /api/our-services
+
+Request Body:
+  {
+    "name": "Mobile App Development",
+    "image": "https://example.com/app.jpg",
+    "description": "Building high-quality mobile apps"
+  }
+
+Response:
+  201 Created
+  {
+    "id": "87654321-dcba-4321-dcba-4321abcd4321",
+    "name": "Mobile App Development",
+    "image": "https://example.com/app.jpg",
+    "description": "Building high-quality mobile apps"
+  }
+        </pre>
+      </div>
+    </div>
+
+    <div class="api-method">
+      <div class="api-header">
+        <h3>PATCH /api/our-services/:id</h3>
+        <span>Method: PATCH</span>
+      </div>
+      <p>Update an existing service by its UUID.</p>
+      <div class="code">
+        <pre>
+PATCH /api/our-services/12345678-abcd-1234-abcd-1234abcd1234
+
+Request Body:
+  {
+    "name": "Updated Service Name",
+    "image": "https://example.com/new-image.jpg",
+    "description": "Updated description for the service"
+  }
+
+Response:
+  200 OK
+  {
+    "id": "12345678-abcd-1234-abcd-1234abcd1234",
+    "name": "Updated Service Name",
+    "image": "https://example.com/new-image.jpg",
+    "description": "Updated description for the service"
+  }
+        </pre>
+      </div>
+    </div>
+
+    <div class="api-method">
+      <div class="api-header">
+        <h3>DELETE /api/our-services/:id</h3>
+        <span>Method: DELETE</span>
+      </div>
+      <p>Delete a specific service by its UUID.</p>
+      <div class="code">
+        <pre>
+DELETE /api/our-services/12345678-abcd-1234-abcd-1234abcd1234
+
+Response:
+  204 No Content
+        </pre>
+      </div>
+    </div>
+
+    <div class="api-method">
+      <div class="api-header">
+        <h3>DELETE /api/our-services</h3>
+        <span>Method: DELETE</span>
+      </div>
+      <p>Delete all services in the database.</p>
+      <div class="code">
+        <pre>
+DELETE /api/our-services
+
+Response:
+  204 No Content
+        </pre>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>Note:</strong> All API responses are in JSON format, and the request body must be sent in JSON format as well.
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Our Services API. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

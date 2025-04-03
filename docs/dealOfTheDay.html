@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deal of the Day API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      width: 100%;
+    }
+    h1 {
+      color: #333;
+    }
+    h2 {
+      color: #555;
+    }
+    .endpoint {
+      background-color: #f1f1f1;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .code {
+      background-color: #2e2e2e;
+      color: #fff;
+      padding: 10px;
+      font-family: monospace;
+      border-radius: 5px;
+      display: block;
+      margin-top: 5px;
+      white-space: pre-wrap; /* Makes sure long lines break */
+      word-wrap: break-word;
+    }
+    .response,
+    .request {
+      background-color: #e1e1e1;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 100%;
+      overflow-x: auto; /* Enables horizontal scroll */
+      white-space: nowrap; /* Prevents wrapping of long lines */
+    }
+    .request {
+      background-color: #d1f7d7;
+    }
+    .parameters {
+      margin-left: 20px;
+    }
+    .parameters li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Deal of the Day API Documentation</h1>
+
+  <p>This API allows you to manage "deal of the day" data with various operations including creating, updating, retrieving, and deleting deals.</p>
+
+  <h2>Base URL</h2>
+  <p><code>http://localhost:5000/api/deal-of-the-day</code></p>
+
+  <h2>Endpoints</h2>
+
+  <!-- GET All Deals -->
+  <div class="endpoint">
+    <h3>GET /api/deal-of-the-day</h3>
+    <p>Returns a list of all deals.</p>
+    <div class="request">
+      <p><strong>Request:</strong> No parameters needed.</p>
+    </div>
+    <div class="response">
+      <p><strong>Response:</strong> An array of deals (if any).</p>
+      <pre class="code">
+[
+  {
+    "id": "uuid",
+    "name": "Mountain View Chalet",
+    "location": "Alps, Switzerland",
+    "rating": "9.2",
+    "ratingText": "Exceptional",
+    "reviewCount": "1,824",
+    "price": "18,750",
+    "imageUrl": "https://images.unsplash.com/photo-1581819896533-f8ab6767ce7e?q=80&w=2101&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  }
+]
+      </pre>
+    </div>
+  </div>
+
+  <!-- GET Deal by ID -->
+  <div class="endpoint">
+    <h3>GET /api/deal-of-the-day/:id</h3>
+    <p>Returns a specific deal by its ID.</p>
+    <div class="request">
+      <p><strong>Request:</strong></p>
+      <ul class="parameters">
+        <li><code>id</code>: The unique ID of the deal.</li>
+      </ul>
+    </div>
+    <div class="response">
+      <p><strong>Response:</strong> A single deal object or error message.</p>
+      <pre class="code">
+{
+  "id": "uuid",
+  "name": "Mountain View Chalet",
+  "location": "Alps, Switzerland",
+  "rating": "9.2",
+  "ratingText": "Exceptional",
+  "reviewCount": "1,824",
+  "price": "18,750",
+  "imageUrl": "https://images.unsplash.com/photo-1581819896533-f8ab6767ce7e?q=80&w=2101&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+}
+      </pre>
+    </div>
+  </div>
+
+  <!-- POST New Deal -->
+  <div class="endpoint">
+    <h3>POST /api/deal-of-the-day</h3>
+    <p>Adds a new deal to the system.</p>
+    <div class="request">
+      <p><strong>Request:</strong> A JSON object representing the new deal.</p>
+      <pre class="code">
+{
+  "name": "New Mountain Retreat",
+  "location": "Rocky Mountains, Canada",
+  "rating": "9.8",
+  "ratingText": "Excellent",
+  "reviewCount": "2,345",
+  "price": "25,000",
+  "imageUrl": "https://example.com/new-image.jpg"
+}
+      </pre>
+    </div>
+    <div class="response">
+      <p><strong>Response:</strong> The created deal object.</p>
+      <pre class="code">
+{
+  "id": "new-uuid",
+  "name": "New Mountain Retreat",
+  "location": "Rocky Mountains, Canada",
+  "rating": "9.8",
+  "ratingText": "Excellent",
+  "reviewCount": "2,345",
+  "price": "25,000",
+  "imageUrl": "https://example.com/new-image.jpg"
+}
+      </pre>
+    </div>
+  </div>
+
+  <!-- PATCH Update Deal -->
+  <div class="endpoint">
+    <h3>PATCH /api/deal-of-the-day/:id</h3>
+    <p>Updates a specific deal by its ID.</p>
+    <div class="request">
+      <p><strong>Request:</strong> A JSON object with the updated fields for the deal.</p>
+      <pre class="code">
+{
+  "name": "Updated Mountain Retreat",
+  "price": "20,000"
+}
+      </pre>
+    </div>
+    <div class="response">
+      <p><strong>Response:</strong> The updated deal object.</p>
+      <pre class="code">
+{
+  "id": "updated-uuid",
+  "name": "Updated Mountain Retreat",
+  "location": "Rocky Mountains, Canada",
+  "rating": "9.8",
+  "ratingText": "Excellent",
+  "reviewCount": "2,345",
+  "price": "20,000",
+  "imageUrl": "https://example.com/updated-image.jpg"
+}
+      </pre>
+    </div>
+  </div>
+
+  <!-- DELETE Deal by ID -->
+  <div class="endpoint">
+    <h3>DELETE /api/deal-of-the-day/:id</h3>
+    <p>Deletes a specific deal by its ID.</p>
+    <div class="request">
+      <p><strong>Request:</strong> No body is needed. The deal will be deleted based on the ID provided in the URL.</p>
+    </div>
+    <div class="response">
+      <p><strong>Response:</strong> A status code of 204 indicating the deal was successfully deleted.</p>
+    </div>
+  </div>
+
+  <!-- DELETE All Deals -->
+  <div class="endpoint">
+    <h3>DELETE /api/deal-of-the-day</h3>
+    <p>Deletes all deals in the system.</p>
+    <div class="request">
+      <p><strong>Request:</strong> No body is needed. This will delete all deals in the file.</p>
+    </div>
+    <div class="response">
+      <p><strong>Response:</strong> A status code of 204 indicating all deals were successfully deleted.</p>
+    </div>
+  </div>
+
+</body>
+</html>

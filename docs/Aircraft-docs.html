@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Aircraft API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #333;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    pre {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 1rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .endpoint {
+      background-color: #e9ecef;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .request {
+      background-color: #d4edda;
+    }
+    .response {
+      background-color: #cce5ff;
+    }
+    .parameter {
+      font-weight: bold;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Aircraft API Documentation</h1>
+    <p>API for managing aircraft data including adding, updating, and deleting aircrafts like the "Global 6000".</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Overview</h2>
+      <p>The Aircraft API allows users to manage and retrieve aircraft details such as name, images, specifications, and more. It supports operations like GET, POST, PATCH, and DELETE to manage aircraft data efficiently.</p>
+    </section>
+
+    <section>
+      <h2>Data Structure</h2>
+      <p>The aircraft object structure is as follows:</p>
+      <pre>
+{
+  "id": "1",
+  "name": "Global 6000",
+  "images": [
+    "https://media.lunajets.com/media/bombardier-global-express-6000.jpg?width=1640&format=webp",
+    "https://tse1.mm.bing.net/th?id=OIP.fuau-D_S6wbLQuPRHvwWlAHaE8&pid=Api&P=0&h=180",
+    "/api/placeholder/600/400",
+    "/api/placeholder/600/400"
+  ],
+  "shortDescription": "The Global 6000 aircraft has class-leading power for mission equipment, almost 17 hours of endurance, proven reliability with class-leading maintenance intervals and ample cabin space for workstations and mission equipment.",
+  "aircraftDetails": {
+    "guestCapacity": 15,
+    "numberOfPilots": 2,
+    "numberOfFlightAttendants": 1,
+    "luggageCapacity": 0,
+    "numberOfLavatory": 1,
+    "wifiAvailable": "No"
+  },
+  "technicalSpecifications": {
+    "exterior": {
+      "length": "99.5 ft",
+      "wingspan": "94 ft",
+      "height": "25 ft"
+    },
+    "range": {
+      "rangeKm": "11112 Km"
+    },
+    "speed": {
+      "highSpeed": "944 Km/Hr",
+      "typicalCruiseSpeed": "944 Km/Hr"
+    },
+    "engines": {
+      "engineModel": "--",
+      "thrustKN": "--",
+      "flatRatedTo": "--"
+    },
+    "airfieldPerformance": {
+      "takeOffDistance": "6476 ft",
+      "landingDistance": "2236 ft"
+    },
+    "avionics": "--",
+    "operatingAltitude": "51,000 ft"
+  }
+}
+      </pre>
+    </section>
+
+    <section>
+      <h2>API Endpoints</h2>
+      
+      <div class="endpoint">
+        <h3>GET /api/aircrafts</h3>
+        <p>Returns a list of all aircrafts.</p>
+        <div class="response">
+          <h4>Response</h4>
+          <pre>
+[
+  {
+    "id": "1",
+    "name": "Global 6000",
+    "images": ["image1_url", "image2_url"],
+    "shortDescription": "Description of the Global 6000",
+    "aircraftDetails": {
+      "guestCapacity": 15,
+      "numberOfPilots": 2,
+      "numberOfFlightAttendants": 1
+    },
+    "technicalSpecifications": {
+      "exterior": {
+        "length": "99.5 ft",
+        "wingspan": "94 ft"
+      },
+      "speed": {
+        "highSpeed": "944 Km/Hr"
+      }
+    }
+  }
+]
+          </pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>GET /api/aircrafts/:id</h3>
+        <p>Returns details of a specific aircraft by its ID.</p>
+        <div class="parameter">Parameter: <strong>id</strong> (string) - Aircraft ID</div>
+        <div class="response">
+          <h4>Response</h4>
+          <pre>
+{
+  "id": "1",
+  "name": "Global 6000",
+  "images": ["image1_url", "image2_url"],
+  "shortDescription": "Description of the Global 6000",
+  "aircraftDetails": {
+    "guestCapacity": 15,
+    "numberOfPilots": 2,
+    "numberOfFlightAttendants": 1
+  },
+  "technicalSpecifications": {
+    "exterior": {
+      "length": "99.5 ft",
+      "wingspan": "94 ft"
+    },
+    "speed": {
+      "highSpeed": "944 Km/Hr"
+    }
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>POST /api/aircrafts</h3>
+        <p>Creates a new aircraft and generates a unique ID for it.</p>
+        <div class="request">
+          <h4>Request Body</h4>
+          <pre>
+{
+  "name": "Global 6000",
+  "images": ["image1_url", "image2_url"],
+  "shortDescription": "Description of the Global 6000",
+  "aircraftDetails": {
+    "guestCapacity": 15,
+    "numberOfPilots": 2,
+    "numberOfFlightAttendants": 1
+  },
+  "technicalSpecifications": {
+    "exterior": {
+      "length": "99.5 ft",
+      "wingspan": "94 ft"
+    },
+    "speed": {
+      "highSpeed": "944 Km/Hr"
+    }
+  }
+}
+          </pre>
+        </div>
+        <div class="response">
+          <h4>Response</h4>
+          <pre>
+{
+  "id": "2",
+  "name": "Global 6000",
+  "images": ["image1_url", "image2_url"],
+  "shortDescription": "Description of the Global 6000",
+  "aircraftDetails": {
+    "guestCapacity": 15,
+    "numberOfPilots": 2,
+    "numberOfFlightAttendants": 1
+  },
+  "technicalSpecifications": {
+    "exterior": {
+      "length": "99.5 ft",
+      "wingspan": "94 ft"
+    },
+    "speed": {
+      "highSpeed": "944 Km/Hr"
+    }
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>PATCH /api/aircrafts/:id</h3>
+        <p>Updates details of an existing aircraft by ID.</p>
+        <div class="parameter">Parameter: <strong>id</strong> (string) - Aircraft ID</div>
+        <div class="request">
+          <h4>Request Body</h4>
+          <pre>
+{
+  "name": "Updated Global 6000",
+  "images": ["updated_image1_url", "updated_image2_url"]
+}
+          </pre>
+        </div>
+        <div class="response">
+          <h4>Response</h4>
+          <pre>
+{
+  "id": "1",
+  "name": "Updated Global 6000",
+  "images": ["updated_image1_url", "updated_image2_url"],
+  "shortDescription": "Updated description",
+  "aircraftDetails": {
+    "guestCapacity": 15,
+    "numberOfPilots": 2,
+    "numberOfFlightAttendants": 1
+  },
+  "technicalSpecifications": {
+    "exterior": {
+      "length": "99.5 ft",
+      "wingspan": "94 ft"
+    },
+    "speed": {
+      "highSpeed": "944 Km/Hr"
+    }
+  }
+}
+          </pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>DELETE /api/aircrafts/:id</h3>
+        <p>Deletes a specific aircraft by ID.</p>
+        <div class="parameter">Parameter: <strong>id</strong> (string) - Aircraft ID</div>
+        <div class="response">
+          <h4>Response</h4>
+          <pre>
+Status: 204 No Content
+          </pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>DELETE /api/aircrafts</h3>
+        <p>Deletes all aircrafts from the database.</p>
+        <div class="response">
+          <h4>Response</h4>
+          <pre>
+Status: 204 No Content
+          </pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Aircraft API Documentation</p>
+  </footer>
+</body>
+</html>
